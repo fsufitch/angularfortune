@@ -1,0 +1,16 @@
+<h1>{{title}}</h1>
+<p class="row">
+  <button class="btn btn-default"
+          (click)="updateFortune()">Get another one!</button>
+  <label>
+    <input type="checkbox" [(ngModel)]="cleanHumor"/> Protect me from naughty fortunes
+  </label>
+</p>
+
+<div class="alert alert-danger" role="alert" [style.display]="offensive ? 'block' : 'none'">
+  <strong>Oh fiddlesticks!</strong>
+  This fortune is from the "offensive" folder. Shield your eyes!
+</div>
+<div class="row">
+  <pre>{{fortune}}</pre>
+</div>

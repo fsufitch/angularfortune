@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <title>Stuff</title>
+
+  <link rel="stylesheet" type="text/css" href="/static/node_modules/bootstrap/dist/css/bootstrap.css" />
+
+  <script src="/static/node_modules/es6-shim/es6-shim.js"></script>
+  <script src="/static/node_modules/reflect-metadata/Reflect.js"></script>
+
+  <script src="/static/node_modules/systemjs/dist/system.src.js"></script>
+  <script src="/static/node_modules/zone.js/dist/zone.js"></script>
+  <script src="/static/node_modules/rxjs/bundles/Rx.js"></script>
+
+  <script src="/static/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/static/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+  <script src="/static/systemjs.config.js"></script>
+  <script>
+  System.import('app').catch(function(err){ console.error(err);});
+  </script>
+</head>
+<body>
+  <app>
+  </app>
+</body>
+</html>

@@ -2,7 +2,7 @@ import codecs, json, os, time, sqlite3
 from os import path
 
 from flask import Flask, abort, current_app
-DB_URI = 'file:%s?mode=memory&cache=shared' % time.time()
+DB_URI = 'file:appdb?mode=memory&cache=shared'
 app = Flask(__name__)
 
 DEFAULT_FORTUNES = [
@@ -11,7 +11,7 @@ DEFAULT_FORTUNES = [
 ]
 
 def get_db():
-    return sqlite3.connect(DB_URI)
+    return sqlite3.connect(DB_URI, uri=True)
 
 def init_db():
     db = get_db()

@@ -1,28 +1,29 @@
-import {Component, provide} from '@angular/core';
-import {FortuneService} from './fortune.service';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {FortuneService, FortuneEntry} from '../services/fortune.service';
 
 @Component({
   selector: 'fortune',
   templateUrl: 'app/fortune/fortune.component.html',
-  providers: [provide(FortuneService, {useClass: FortuneService})]
 })
 export class FortuneComponent {
   title: string = 'Your fortune';
-  fortune: string;
-  offensive: boolean;
+  fortune: FortuneEntry;
   cleanHumor: boolean = false;
 
-  constructor(private fortuneService: FortuneService) {}
+  constructor(private fortuneService: FortuneService,
+              private router: Router) {
+                this.fortune = null;
+  }
 
   ngOnInit() {
     this.updateFortune();
   }
 
   updateFortune() {
-    this.fortuneService.getFortune(this.cleanHumor)
+    this.fortuneService.getRandomFortune(this.cleanHumor)
       .subscribe(data => {
-        this.fortune = data.body;
-        this.offensive = data.offensive;
+        this.fortune = data;
       });
   }
 }

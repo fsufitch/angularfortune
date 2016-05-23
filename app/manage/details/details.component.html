@@ -1,0 +1,25 @@
+<h3> Fortune Details </h3>
+<div [ngSwitch]="fortune">
+  <div *ngSwitchWhen="null">
+    No fortune selected!
+  </div>
+  <div *ngSwitchDefault>
+    <p> Fortune #{{fortune.id}} selected. </p>
+
+    <div *ngIf="!editing" (click)="editing=true">
+      <p *ngIf="fortune.offensive"><strong>This fortune is offensive.</strong></p>
+      <pre >{{fortune.body}}</pre>
+    </div>
+
+    <div *ngIf="editing">
+    <label> <input type="checkbox" [(ngModel)]="fortune.offensive" /> Offensive </label>
+    <textarea class="form-control" rows="10" [(ngModel)]="fortune.body"></textarea>
+    <p>
+      <button class="btn btn-primary" (click)="saveChanges()">Save</button>
+      <button class="btn btn-danger">Delete</button>
+    </p>
+  </div>
+
+
+  </div>
+</div>

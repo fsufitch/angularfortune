@@ -1,0 +1,11 @@
+<input type="text" class="form-control" placeholder="Search for a fortune"
+        [value]="searchQuery" [ngFormControl]="searchQueryControl"/>
+<hr />
+<p>
+  {{resultPages}} pages found!
+</p>
+
+<div id="searchResults" *ngFor="let fortune of searchResults; #i=index">
+  <pre (click)="router.navigate(['manage', fortune.id])">{{fortune.body}}</pre>
+  <hr />
+</div>

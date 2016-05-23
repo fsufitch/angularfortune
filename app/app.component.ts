@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router, Routes, ROUTER_DIRECTIVES} from '@angular/router';
 import {HTTP_PROVIDERS} from '@angular/http';
-import {FortuneComponent} from './fortune.component';
+import {FortuneComponent} from './fortune/fortune.component';
 import {ManageFortunesComponent} from './manage/manage.component';
 
 @Component({

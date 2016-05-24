@@ -16,7 +16,7 @@ import {ManageFortunesComponent} from './manage/manage.component';
               provide(FortuneSearchService, {useClass: FortuneSearchService})],
 })
 @Routes([
-  {path: "/show", component: FortuneComponent},
+  {path: "/", component: FortuneComponent},
   {path: "/manage/:fortuneId", component: ManageFortunesComponent},
   {path: "/manage", component: ManageFortunesComponent},
 ])
@@ -24,4 +24,6 @@ export class AppComponent{
   constructor(private router: Router) {
   }
 
+  ngOnInit() {
+  }
 }

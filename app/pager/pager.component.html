@@ -1,0 +1,20 @@
+<nav *ngIf="numPages>1">
+  <ul class="pagination">
+    <li [class.disabled]="currentPage<=0"
+        (click)="prevPage()">
+      <a aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li *ngFor="let page of getPages()"
+        [class.active]="currentPage==page.pagenum">
+      <a (click)="triggerPageChange(page.pagenum)">{{page.display}}</a>
+    </li>
+    <li [class.disabled]="currentPage>=numPages-1"
+        (click)="nextPage()">
+      <a aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

@@ -2,3 +2,8 @@
   color: #555;
   background-color: #e7e7e7;
 }
+
+pre.fortune {
+  font-family: sans-serif;
+  background: default;
+}

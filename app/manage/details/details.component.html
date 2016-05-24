@@ -7,8 +7,11 @@
     <p> Fortune #{{fortune.id}} selected. </p>
 
     <div *ngIf="!editing" (click)="editing=true">
-      <p *ngIf="fortune.offensive"><strong>This fortune is offensive.</strong></p>
-      <pre >{{fortune.body}}</pre>
+      <p>
+        <span *ngIf="fortune.offensive" class="label label-danger">Offensive</span>
+        <span *ngIf="fortune.custom" class="label label-info">Customized</span>
+      </p>
+      <pre class="fortune">{{fortune.body}}</pre>
     </div>
 
     <div *ngIf="editing">

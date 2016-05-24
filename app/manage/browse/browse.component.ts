@@ -2,6 +2,7 @@ import {Component, Inject, provide} from '@angular/core';
 import {Control} from '@angular/common';
 import {FortuneEntry, FortuneService} from '../../services/fortune.service';
 import {FortuneSearchService} from '../../services/search.service';
+import {PagerComponent} from '../../pager/pager.component';
 import {Router, RouteSegment} from '@angular/router';
 
 import 'rxjs/add/operator/debounceTime';
@@ -9,6 +10,8 @@ import 'rxjs/add/operator/debounceTime';
 @Component({
   selector: 'fortuneBrowse',
   templateUrl: 'app/manage/browse/browse.component.html',
+  styleUrls: ['app/manage/browse/browse.component.css'],
+  directives: [PagerComponent],
 })
 export class FortuneBrowseComponent {
   searchQuery: string;
@@ -26,23 +29,40 @@ export class FortuneBrowseComponent {
   }
 
   ngOnInit() {
+    this.searchQuery = this.fortuneSearchService.currentSearch
+    this.currentPage = this.fortuneSearchService.currentPage
+    this.fortuneSearchService.search().subscribe(data => {
+      this.resultPages = data.pages;
+      this.currentPage = data.page;
+      this.searchResults = data.results;
+    })
+
     this.searchQueryControl.valueChanges.debounceTime(1000).subscribe(
       (newValue) => {
-        this.updateSearch(newValue);
+        this.newSearch(newValue);
       })
   }
 
-  updateSearch(searchQuery: string) {
+  newSearch(searchQuery: string) {
     this.searchQuery = searchQuery;
-    console.log("searching: " + searchQuery);
-    console.log(this.fortuneSearchService);
-    console.log(this.searchQueryControl);
-    console.log(this);
-    this.fortuneSearchService.search(searchQuery).subscribe(data => {
+    this.currentPage = 0;
+    this.updateSearch();
+  }
+
+  updateSearch() {
+    this.fortuneSearchService.currentSearch = this.searchQuery;
+    this.fortuneSearchService.currentPage = this.currentPage;
+
+    this.fortuneSearchService.search().subscribe(data => {
       this.resultPages = data.pages;
       this.currentPage = data.page;
       this.searchResults = data.results;
     })
   }
 
+  pageChanged(event) {
+    console.log("new page is " + event.page);
+    this.currentPage = event.page;
+    this.updateSearch();
+  }
 }

@@ -1,11 +1,15 @@
 <input type="text" class="form-control" placeholder="Search for a fortune"
         [value]="searchQuery" [ngFormControl]="searchQueryControl"/>
-<hr />
-<p>
-  {{resultPages}} pages found!
-</p>
 
-<div id="searchResults" *ngFor="let fortune of searchResults; #i=index">
-  <pre (click)="router.navigate(['manage', fortune.id])">{{fortune.body}}</pre>
-  <hr />
+<pager numPages="{{resultPages}}"
+       [currentPage]="currentPage"
+       (pageChanged)="pageChanged($event)"></pager>
+
+<div class="searchResult" *ngFor="let fortune of searchResults">
+  <p>
+    <strong> Fortune #{{fortune.id}} </strong>
+    <span *ngIf="fortune.offensive" class="label label-danger">Offensive</span>
+    <span *ngIf="fortune.custom" class="label label-info">Customized</span>
+  </p>
+  <pre (click)="router.navigate(['manage', fortune.id])" class="fortune">{{fortune.body}}</pre>
 </div>

@@ -7,16 +7,23 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class FortuneSearchService {
   private searchUrl = 'search';
+  public currentSearch = '';
+  public currentPage = 0;
 
   constructor(private http: Http) {
 
   }
 
-  search(query: string, page: number=0) {
+  setSearch(query: string, page: number=0) {
+    this.currentSearch = query;
+    this.currentPage = page;
+  }
+
+  search() {
     let url = this.searchUrl;
     let params = new URLSearchParams();
-    params.set('query', query);
-    params.set('page', "" + page);
+    params.set('query', this.currentSearch);
+    params.set('page', "" + this.currentPage);
     let data = this.http.get(url, {'search': params}).map(this.extractData).catch(this.handleError);
     return data;
   }
